@@ -122,27 +122,22 @@ function logInHandler(request, sender, sendResponse) {
   };
 
   var options = {
-    authorizationUser: config.user + ".ws",
+    authorizationUser: config.user,
     password: config.password,
     displayName: config.displayName || "",
     transportOptions: {
       wsServers: [
         {
           scheme: "WSS",
-          sipUri:
-            "<sip:" +
-            config.user +
-            ".ws@" +
-            config.realm +
-            ";transport=wss;lr>",
+          sipUri: `<sip:${config.user}@${config.realm};transport=wss;lr>`,
           weight: 1,
-          wsUri: "wss://" + config.hostname + ":443/ws",
+          wsUri: `wss://${config.hostname}:443/ws`,
           isError: false
         }
       ],
       traceSip: true
     },
-    uri: "sip:" + config.user + ".ws@" + config.realm,
+    uri: `sip:${config.user}@${config.realm}`,
     log: {
       level: "debug"
     },
